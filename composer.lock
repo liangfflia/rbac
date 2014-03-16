@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "fe79129c8369f51b5b5ece0bdfcf70b4",
+    "hash": "8473702358fa4ef6f2c846a621ecb77e",
     "packages": [
         {
             "name": "robmorgan/phinx",

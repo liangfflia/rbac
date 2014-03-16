@@ -9,5 +9,12 @@
     ],
     "require": {
         "robmorgan/phinx": "*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/Database",
+            "src/Session",
+            "src/Support"
+        ]
     }
 }
