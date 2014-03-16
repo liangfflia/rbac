@@ -4,19 +4,17 @@ use Phinx\Migration\AbstractMigration;
 
 class CreateUserTable extends AbstractMigration
 {
-    /**
-     * Change Method.
-     *
-     * More information on this method is available here:
-     * http://docs.phinx.org/en/latest/migrations.html#the-change-method
-     *
-     * Uncomment this method if you would like to use it.
-     *
     public function change()
     {
+        // create the table
+        $table = $this->table('user');
+        $table->addColumn('user_name', 'string')
+            ->addColumn('password', 'string')
+            ->addColumn('created', 'datetime')
+            ->addColumn('email', 'string')
+            ->create();
     }
-    */
-    
+
     /**
      * Migrate Up.
      */
