@@ -1,0 +1,13 @@
+{
+    "name": "bitfroster/rbac",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "bitfroster",
+            "email": "bitfroster@gmail.com"
+        }
+    ],
+    "require": {
+
+    }
+}
