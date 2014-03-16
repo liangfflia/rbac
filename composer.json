@@ -8,6 +8,6 @@
         }
     ],
     "require": {
-
+        "robmorgan/phinx": "*"
     }
 }
