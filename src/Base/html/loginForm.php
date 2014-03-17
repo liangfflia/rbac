@@ -10,6 +10,7 @@
             <input type="password" name="password" />
         </div>
         <div>
+            <input type="hidden" name="login" value="1">
             <button type="submit">Login</button>
         </div>
     </form>

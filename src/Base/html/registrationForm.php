@@ -15,6 +15,7 @@ if (!isset($_GET['registration'])):?>
             <input type="password" name="password" />
         </div>
         <div>
+            <input type="hidden" name="register" value="1">
             <button type="submit">Register</button>
         </div>
     </form>

@@ -59,10 +59,15 @@ class Authenticate extends RbacBase
 
     /**
      * @param array $registerParams
+     * @return bool
      */
     public function register(array $registerParams)
     {
         $params = array();
+        if(array_search('', $registerParams)) {
+            return false;
+        }
+
         $params['email'] = $registerParams['email'];
 
         $generatedPasswordItem = $this->generateHashWithSalt($registerParams['password']);
