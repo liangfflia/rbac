@@ -6,7 +6,7 @@ use Rbac\Session\Session;
 
 class Authenticate extends RbacBaseLoader
 {
-    const SALT_MAX_LENGTH = 12;
+    const COST = 10;
 
     protected $redirectPage;
 
@@ -20,7 +20,7 @@ class Authenticate extends RbacBaseLoader
     /**
      * Handle login action.
      */
-    public function login()
+    public function login($username, $password)
     {
         if($this->isAuthenticated && $this->redirectPage) {
             header('Location: ' . $this->redirectPage);
@@ -36,6 +36,8 @@ class Authenticate extends RbacBaseLoader
     public function register(array $registerParams)
     {
         $password = $this->generateHashWithSalt($registerParams['password']);
+
+
     }
 
     /**
@@ -44,9 +46,9 @@ class Authenticate extends RbacBaseLoader
      */
     protected function generateHashWithSalt($password)
     {
-        $intermediateSalt = md5(uniqid(rand(), true));
-        $salt = substr($intermediateSalt, 0, self::SALT_MAX_LENGTH);
-        $hash = hash("sha256", $password . $salt);
+        $salt = strtr(base64_encode(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM)), '+', '.');
+        $salt = sprintf("$2a$%02d$", self::COST) . $salt;
+        $hash = crypt($password, $salt);
 
         return array(
             'password' => $hash,
