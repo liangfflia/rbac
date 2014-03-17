@@ -42,7 +42,7 @@ class Authenticate extends RbacBaseLoader
      * @param $password
      * @return string
      */
-    protected function generateHashWithSalt(string $password)
+    protected function generateHashWithSalt($password)
     {
         $intermediateSalt = md5(uniqid(rand(), true));
         $salt = substr($intermediateSalt, 0, self::SALT_MAX_LENGTH);
