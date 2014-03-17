@@ -11,7 +11,7 @@ class CreateUserTable extends AbstractMigration
         $table->addColumn('email', 'string', array('limit' => 100))
             ->addColumn('password', 'string')
             ->addColumn('salt', 'string', array('limit' => 50))
-            ->addColumn('created', 'datetime')
+            ->addColumn('created', 'timestamp', array('default' => 'CURRENT_TIMESTAMP'))
             ->addIndex(array('email'), array('unique' => true))
             ->create();
     }
