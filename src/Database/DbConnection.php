@@ -4,6 +4,10 @@ namespace Rbac\Database;
 
 use PDO;
 
+/**
+ * Class DbConnection
+ * @package Rbac\Database
+ */
 class DbConnection
 {
     private static $_instance = null;

@@ -1,7 +1,10 @@
 <?php
 
 namespace Rbac\Session;
-
+/**
+ * Class Session
+ * @package Rbac\Session
+ */
 class Session
 {
     /**

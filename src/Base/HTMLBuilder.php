@@ -1,7 +1,10 @@
 <?php
 
 namespace Rbac\Base;
-
+/**
+ * Class HTMLBuilder
+ * @package Rbac\Base
+ */
 class HTMLBuilder {
 
     public static function getLoginFormHTML()

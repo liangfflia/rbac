@@ -5,7 +5,11 @@ namespace Rbac\Base;
 use Rbac\Database\DbLayer;
 use Rbac\Database\DbUserData;
 
-class Authenticate extends RbacBaseLoader
+/**
+ * Class Authenticate
+ * @package Rbac\Base
+ */
+class Authenticate extends RbacBase
 {
     const COST = 10;
 
@@ -20,12 +24,14 @@ class Authenticate extends RbacBaseLoader
 
     /**
      * Handle login action.
+     *
+     * @param $username
+     * @param $password
      */
     public function login($username, $password)
     {
-        if($this->isAuthenticated && $this->redirectPage) {
-            header('Location: ' . $this->redirectPage);
-            die;
+        if($this->isAuthenticated) {
+            $this->redirect($this->redirectPage);
         }
     }
 
@@ -34,11 +40,18 @@ class Authenticate extends RbacBaseLoader
 
     }
 
+    /**
+     * @param array $registerParams
+     */
     public function register(array $registerParams)
     {
-        $password = $this->generateHashWithSalt($registerParams['password']);
+        $params = $this->generateHashWithSalt($registerParams['password']);
 
+        $db = new DbUserData();
 
+        if($db->setUserData($params)) {
+            $this->redirect($this->redirectPage . '?registration=true');
+        }
     }
 
     /**
