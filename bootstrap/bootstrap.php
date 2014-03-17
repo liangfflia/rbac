@@ -1,6 +1,5 @@
 <?php
 
-
 require __DIR__ . '/../vendor/autoload.php';
 
-Session::open();
+$rbac = new Rbac\Base\RbacBaseLoader();

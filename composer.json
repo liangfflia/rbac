@@ -8,13 +8,14 @@
         }
     ],
     "require": {
+        "php": ">=5.3.2",
         "robmorgan/phinx": "*"
     },
     "autoload": {
         "classmap": [
+            "src/Base",
             "src/Database",
-            "src/Session",
-            "src/Support"
+            "src/Session"
         ]
     }
 }
