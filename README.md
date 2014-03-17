@@ -8,3 +8,5 @@ Requirements
 Composer
 
 PHP >= 5.3
+MySQL
+PDO
