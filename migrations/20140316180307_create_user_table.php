@@ -8,10 +8,9 @@ class CreateUserTable extends AbstractMigration
     {
         // create the table
         $table = $this->table('user');
-        $table->addColumn('user_name', 'string')
+        $table->addColumn('email', 'string', array('limit' => 100))
             ->addColumn('password', 'string')
             ->addColumn('created', 'datetime')
-            ->addColumn('email', 'string')
             ->create();
     }
 
