@@ -1,5 +1,7 @@
 <?php
 
+namespace Rbac\Database;
+
 class DbConnection
 {
     private static $_instance = null;
@@ -11,12 +13,16 @@ class DbConnection
     public static function getInstance()
     {
         if (!self::$_instance) {
-            self::$_instance = new PDO(
-                "mysql:host=localhost;dbname=rbac",
-                'root',
-                'ver1taS'
-            );
-            self::$_instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            try {
+                self::$_instance = new PDO(
+                    "mysql:host=localhost;dbname=rbac",
+                    'root',
+                    'ver1taS'
+                );
+            }
+            catch(PDOException $e) {
+                die("PDO CONNECTION ERROR: " . $e->getMessage() . "<br/>");
+            }
         }
 
         return self::$_instance;
