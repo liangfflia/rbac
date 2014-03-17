@@ -12,6 +12,7 @@ class CreateUserTable extends AbstractMigration
             ->addColumn('password', 'string')
             ->addColumn('salt', 'string', array('limit' => 50))
             ->addColumn('created', 'datetime')
+            ->addIndex(array('email'), array('unique' => true))
             ->create();
     }
 

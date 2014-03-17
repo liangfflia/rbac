@@ -2,6 +2,8 @@
 
 namespace Rbac\Database;
 
+use PDO;
+
 class DbConnection
 {
     private static $_instance = null;
@@ -21,7 +23,7 @@ class DbConnection
                 );
             }
             catch(PDOException $e) {
-                die("PDO CONNECTION ERROR: " . $e->getMessage() . "<br/>");
+                echo $e->getMessage();
             }
         }
 

@@ -2,7 +2,8 @@
 
 namespace Rbac\Base;
 
-use Rbac\Session\Session;
+use Rbac\Database\DbLayer;
+use Rbac\Database\DbUserData;
 
 class Authenticate extends RbacBaseLoader
 {

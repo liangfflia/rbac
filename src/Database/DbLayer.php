@@ -1,30 +1,43 @@
 <?php
 
+namespace Rbac\Database;
+
+use PDO;
+
 class DbLayer {
-    protected function setData($name, $value)
+
+    const TABLE_NAME = 'user';
+
+    protected function insert($params)
     {
-        $sth = DbConnection::getInstance()->prepare("INSERT INTO user (name, value) VALUES (:name, :value)");
-        $sth->bindParam(':name', $name);
-        $sth->bindParam(':value', $value);
-        $sth->execute();
+        $pdoInstance = DbConnection::getInstance()->prepare("INSERT INTO " . self::TABLE_NAME . " (email, password, salt) VALUES (:email, :password, :salt)");
+
+        $pdoInstance->bindValue(':email', $params['email']);
+        $pdoInstance->bindValue(':password', $params['password']);
+        $pdoInstance->bindValue(':salt', $params['salt']);
+
+        $this->execute($pdoInstance);
     }
 
-    public function getData($userId)
+    public function select($params)
     {
-        $sth = DbConnection::getInstance()->prepare("SELECT user_name FROM user WHERE id = :userId");
-        $sth->bindParam(':userId', $userId);
-        $sth->execute();
+        $pdoInstance = DbConnection::getInstance()->prepare("SELECT user_name FROM " . self::TABLE_NAME . " WHERE id = :userId");
 
-        return $sth->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($params as $param) {
+            $pdoInstance->bindParam(':param', $param);
+            $this->execute($pdoInstance);
+        }
+
+        return $pdoInstance->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    protected function execute(Object $pdoInstance, $values)
-    {
+    protected function execute($pdoInstance){
         try {
-            $pdoInstance->execute($values);
+            $pdoInstance->execute();
         }
         catch (PDOException $e) {
             echo $e->getMessage();
         }
     }
+
 }
