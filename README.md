@@ -29,3 +29,19 @@ Create DB for your auth module. Paste credentials into phinx.yml (it was generat
     php vendor/bin/phinx migrate
 
 This command should create table structure in your database.
+
+TODO
+------------
+"remember me" functionality.
+
+session management.
+
+client side form validation.
+
+captcha.
+
+"forgot password" functionality
+
+CSS styling.
+
+code refactoring.
