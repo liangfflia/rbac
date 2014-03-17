@@ -8,8 +8,8 @@ use PDO;
  * Class DbLayer
  * @package Rbac\Database
  */
-class DbLayer {
-
+class DbLayer
+{
     const TABLE_NAME = 'user';
 
     protected function insert($params)
@@ -24,17 +24,19 @@ class DbLayer {
         $this->execute($pdoInstance);
     }
 
+    /**
+     * @param $params
+     * @return mixed
+     */
     public function select($params)
     {
-        $pdoInstance = DbConnection::getInstance()->prepare("SELECT user_name FROM " .
-            self::TABLE_NAME . " WHERE id = :userId");
+        $pdoInstance = DbConnection::getInstance()->prepare("SELECT email, password, salt FROM " .
+            self::TABLE_NAME . " WHERE `email` = :email");
 
-        foreach ($params as $param) {
-            $pdoInstance->bindParam(':param', $param);
-            $this->execute($pdoInstance);
-        }
+        $pdoInstance->bindValue(':email', $params['email']);
+        $this->execute($pdoInstance);
 
-        return $pdoInstance->fetchAll(PDO::FETCH_ASSOC);
+        return $pdoInstance->fetch(PDO::FETCH_ASSOC);
     }
 
     protected function execute($pdoInstance){

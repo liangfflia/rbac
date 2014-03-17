@@ -1,5 +1,4 @@
-<?php
-if (!isset($_GET['registration'])):?>
+<?php if (!isset($_GET['login'])):?>
 <div>
     <form method="post" action="actions/userActionHandler.php">
         <div>
@@ -16,8 +15,6 @@ if (!isset($_GET['registration'])):?>
     </form>
     <a href="/actions/forgot.php">Forgot password?</a>
 </div>
-<?php
-else:
-    echo 'You have successfully logged in!';
-endif;
-?>
+<?php else:
+    echo 'You have been successfully logged in!';
+endif;?>

@@ -2,6 +2,7 @@
 
 namespace Rbac\Base;
 
+use Rbac\Session\Session;
 use Rbac\Database\DbLayer;
 use Rbac\Database\DbUserData;
 
@@ -25,19 +26,35 @@ class Authenticate extends RbacBase
     /**
      * Handle login action.
      *
-     * @param $username
-     * @param $password
+     * @param $registerParams
      */
-    public function login($username, $password)
+    public function login($registerParams)
     {
+        $db = new DbUserData();
+        $result = $db->getUserData($registerParams['email'], $registerParams['password']);
+
+        $incomingPassword = $result['password'] . $result['salt'];
+        $dbPassword = $this->generateHashWithSalt($registerParams['password'], $result['salt']);
+
+        if($incomingPassword === $dbPassword) {
+            $this->isAuthenticated = true;
+        }
+
         if($this->isAuthenticated) {
-            $this->redirect($this->redirectPage);
+            $this->redirect($this->redirectPage . '?login=true');
+        }
+        else {
+            echo 'Your password is incorrect!';
         }
     }
 
+    /**
+     * Handle logout action.
+     */
     public function logout()
     {
-
+        Session::destroy();
+        $this->redirect($this->redirectPage);
     }
 
     /**
@@ -45,7 +62,14 @@ class Authenticate extends RbacBase
      */
     public function register(array $registerParams)
     {
-        $params = $this->generateHashWithSalt($registerParams['password']);
+        $params = array();
+        $params['email'] = $registerParams['email'];
+
+        $generatedPasswordItem = $this->generateHashWithSalt($registerParams['password']);
+
+        foreach ($generatedPasswordItem as $key => $value) {
+            $params[$key] = $value;
+        }
 
         $db = new DbUserData();
 
@@ -58,16 +82,24 @@ class Authenticate extends RbacBase
      * @param $password
      * @return string
      */
-    protected function generateHashWithSalt($password)
+    protected function generateHashWithSalt($password, $salt = false)
     {
-        $salt = strtr(base64_encode(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM)), '+', '.');
-        $salt = sprintf("$2a$%02d$", self::COST) . $salt;
-        $hash = crypt($password, $salt);
+        if ($salt == false) {
+            $salt = strtr(base64_encode(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM)), '+', '.');
+            $salt = sprintf("$2a$%02d$", self::COST) . $salt;
 
-        return array(
-            'password' => $hash,
-            'salt' => $salt
-        );
+            $hash = crypt($password, $salt);
+
+            return array(
+                'password' => $hash,
+                'salt' => $salt
+            );
+        }
+        else {
+            $hash = crypt($password, $salt);
+
+            return $hash . $salt;
+        }
     }
 
 }

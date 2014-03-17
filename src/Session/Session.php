@@ -27,6 +27,8 @@ class Session
 
     /**
      * Frees all session variables and destroys all data registered to a session.
+     *
+     * @return bool
      */
     public static function destroy()
     {
@@ -34,6 +36,8 @@ class Session
         {
             @session_unset();
             @session_destroy();
+
+            return true;
         }
     }
 

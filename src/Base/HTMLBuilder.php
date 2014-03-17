@@ -1,6 +1,7 @@
 <?php
 
 namespace Rbac\Base;
+
 /**
  * Class HTMLBuilder
  * @package Rbac\Base
