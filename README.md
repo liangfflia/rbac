@@ -24,9 +24,12 @@ Then you need to run composer install into the root directory:
 
     <path to your composer> install
 
-Create DB for your auth module. Paste credentials into phinx.yml (it was generated when you ran composer install command) and run:
+Create DB for your auth module and run:
 
     php vendor/bin/phinx init .
+    
+Paste credentials into phinx.yml (it was generated when you ran previous command)
+
     php vendor/bin/phinx migrate
 
 This command should create table structure in your database.
