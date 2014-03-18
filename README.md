@@ -34,6 +34,23 @@ Paste credentials into phinx.yml (it was generated when you ran previous command
 
 This command should create table structure in your database.
 
+Usage
+------------
+
+Add:
+
+    require __DIR__ . '/bootstrap/bootstrap.php';
+
+and then add:
+
+    Rbac\Base\HTMLBuilder::getLoginFormHTML();
+
+for the login form and:
+
+    Rbac\Base\HTMLBuilder::getRegistratonFormHTML();
+    
+for the registration form.
+
 TODO
 ------------
 
@@ -53,19 +70,3 @@ CSS styling.
 
 code refactoring.
 
-USAGE
-------------
-
-Add:
-
-    require __DIR__ . '/bootstrap/bootstrap.php';
-
-and then add:
-
-    Rbac\Base\HTMLBuilder::getLoginFormHTML();
-
-for the login form and:
-
-    Rbac\Base\HTMLBuilder::getRegistratonFormHTML();
-    
-for the registration form.
