@@ -26,12 +26,16 @@ Then you need to run composer install into the root directory:
 
 Create DB for your auth module. Paste credentials into phinx.yml (it was generated when you ran composer install command) and run:
 
+    php vendor/bin/phinx init .
     php vendor/bin/phinx migrate
 
 This command should create table structure in your database.
 
 TODO
 ------------
+
+unit tests.
+
 "remember me" functionality.
 
 session management.
