@@ -52,3 +52,20 @@ captcha.
 CSS styling.
 
 code refactoring.
+
+USAGE
+------------
+
+Add:
+
+    require __DIR__ . '/bootstrap/bootstrap.php';
+
+and then add:
+
+    Rbac\Base\HTMLBuilder::getLoginFormHTML();
+
+for the login form and:
+
+    Rbac\Base\HTMLBuilder::getRegistratonFormHTML();
+    
+for the registration form.
